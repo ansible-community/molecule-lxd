@@ -1,0 +1,7 @@
+bash [test platform:rpm]
+gcc-c++ [test platform:rpm]
+gcc [test platform:rpm]
+
+python3-devel [test !platform:centos-7 platform:rpm]
+python3-libselinux [platform:fedora]
+pkg-config [platform:dpkg]
