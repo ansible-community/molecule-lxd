@@ -5,9 +5,7 @@
       - publish-to-pypi
     check:
       jobs: &defaults
-        - molecule-tox-linters:
-            vars:
-              tox_envlist: lint
+        - molecule-tox-linters
         - molecule-tox-packaging:
             vars:
               tox_envlist: packaging
