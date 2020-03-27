@@ -12,6 +12,7 @@
         - molecule-tox-py36-centos-8:
             voting: false
         - molecule-tox-py36-ubuntu-bionic:
+            pre-run: playbooks/ensure-lxd.yaml
             voting: false
         - molecule-tox-py37-fedora-30:
             voting: false
