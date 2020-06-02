@@ -7,7 +7,7 @@
       jobs: &defaults
         - molecule-tox-linters:
             vars:
-              tox_envlist: lint
+              tox_envlist: linters
         - molecule-tox-packaging:
             vars:
               tox_envlist: packaging
