@@ -5,6 +5,7 @@
   tasks:
     - name: Install some basic packages because LXC containers are bare
       raw: |
+        dhclient || true
         if [ -x "$(command -v apt-get)" ]; then
           apt-get update && apt-get install --assume-yes ca-certificates curl python3 python3-apt sudo
         elif [ -x "$(command -v yum)" ]; then

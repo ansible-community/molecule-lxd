@@ -3,12 +3,13 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  no_log: "{{ molecule_no_log }}"
   vars:
     default_source:
       type: image
+      mode: pull
       server: https://images.linuxcontainers.org
-      alias: ubuntu/bionic/amd64
+      alias: ubuntu/bionic
+      protocol: simplestreams
 
   tasks:
     - name: Create molecule instance(s)
@@ -24,9 +25,8 @@
         architecture: "{{ item.architecture | default(omit) }}"
         devices: "{{ item.devices | default(omit) }}"
         profiles: "{{ item.profiles | default(omit) }}"
-        wait_for_ipv4_addresses: true
+        wait_for_ipv4_addresses: false
         timeout: 600
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
-      no_log: false
