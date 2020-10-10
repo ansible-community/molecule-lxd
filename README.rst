@@ -13,11 +13,11 @@ Molecule LXD Plugin
    :target: https://github.com/python/black
    :alt: Python Black Code Style
 
-.. image:: https://img.shields.io/badge/Code%20of%20Conduct-Ansible-silver.svg
+.. image:: https://img.shields.io/badge/Code%20of%20Conduct-silver.svg
    :target: https://docs.ansible.com/ansible/latest/community/code_of_conduct.html
    :alt: Ansible Code of Conduct
 
-.. image:: https://img.shields.io/badge/Mailing%20lists-Ansible-orange.svg
+.. image:: https://img.shields.io/badge/Mailing%20lists-silver.svg
    :target: https://docs.ansible.com/ansible/latest/community/communication.html#mailing-list-information
    :alt: Ansible mailing lists
 
