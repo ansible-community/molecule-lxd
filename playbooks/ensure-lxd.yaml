@@ -2,7 +2,7 @@
   tasks:
 
     - name: Install LXD as a snap
-      shell: snap install lxd
+      command: snap install lxd
       register: _snap_install_result
       changed_when: not(_snap_install_result.stderr is search('already installed'))
 
@@ -43,8 +43,11 @@
       copy:
         content: "{{ _lxd_preseed_config | to_nice_yaml }}"
         dest: /tmp/lxd-preseed.yml
+        mode: 0600
       register: _lxd_preseed_file_result
 
     - name: Configure LXD with preseed file
-      shell: cat /tmp/lxd-preseed.yml | lxd init --preseed
+      shell: |
+        set -euo pipefail
+        cat /tmp/lxd-preseed.yml | lxd init --preseed
       when: _lxd_preseed_file_result is changed
