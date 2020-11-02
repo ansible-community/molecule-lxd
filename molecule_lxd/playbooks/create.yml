@@ -1,0 +1,37 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+
+  vars:
+    default_source:
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      alias: ubuntu/bionic
+      protocol: simplestreams
+    default_config:
+      "security.nesting": "true"
+
+  tasks:
+    - name: Create molecule instance(s)
+      lxd_container:
+        name: "{{ item.name }}"
+        state: started
+        source: "{{ default_source | combine(item.source | default({})) }}"
+        config: "{{ default_config | combine(item.config | default({})) }}"
+        architecture: "{{ item.architecture | default(omit) }}"
+        devices: "{{ item.devices | default(omit) }}"
+        profiles: "{{ item.profiles | default(omit) }}"
+        url: "{{ item.url | default(omit) }}"
+        cert_file: "{{ item.cert_file | default(omit) }}"
+        key_file: "{{ item.key_file | default(omit) }}"
+        trust_password: "{{ item.trust_password | default(omit) }}"
+        wait_for_ipv4_addresses: true
+        timeout: 600
+      loop: "{{ molecule_yml.platforms }}"
+      loop_control:
+        label: "{{ item.name }}"
+      no_log: false

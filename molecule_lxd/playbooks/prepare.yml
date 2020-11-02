@@ -1,0 +1,26 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+
+  vars:
+    common_packages: "ca-certificates curl python3 sudo"
+
+  tasks:
+    - name: Install basic packages to bare containers
+      raw: |
+        if [ -x "$(command -v apt-get)" ]; then
+          apt-get update && apt-get install --assume-yes {{ common_packages }} python3-apt
+        elif [ -x "$(command -v dnf)" ]; then
+          dnf --assumeyes install {{ common_packages }} python3-dnf
+        elif [ -x "$(command -v yum)" ]; then
+          yum install --assumeyes {{ common_packages }}
+        elif [ -x "$(command -v zypper)" ]; then
+          zypper --non-interactive --gpg-auto-import-keys refresh
+          zypper --non-interactive install {{ common_packages }} ca-certificates-cacert ca-certificates-mozilla
+        elif [ -x "$(command -v apk)" ]; then
+          apk update && apk add {{ common_packages }}
+        elif [ -x "$(command -v pacman)" ]; then
+          pacman -Syu --noconfirm {{ common_packages }}
+        fi
