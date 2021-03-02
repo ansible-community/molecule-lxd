@@ -6,6 +6,7 @@
 
   tasks:
     - name: Install basic packages to bare containers
+      tags: skip_ansible_lint
       raw: |
         if [ -x "$(command -v apt-get)" ]; then
           export DEBIAN_FRONTEND=noninteractive
