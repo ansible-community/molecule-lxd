@@ -10,7 +10,6 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
       - id: check-byte-order-marker
-      - id: check-executables-have-shebangs
       - id: check-merge-conflict
       - id: debug-statements
       - id: check-yaml
@@ -45,18 +44,6 @@ repos:
         args: []
         require_serial: false
         additional_dependencies: []
-  - repo: https://github.com/openstack-dev/bashate.git
-    rev: 2.0.0
-    hooks:
-      - id: bashate
-        entry: bashate --error . --ignore=E006,E040
-        # Run bashate check for all bash scripts
-        # Ignores the following rules:
-        # E006: Line longer than 79 columns (as many scripts use jinja
-        #       templating, this is very difficult)
-        # E040: Syntax error determined using `bash -n` (as many scripts
-        #       use jinja templating, this will often fail and the syntax
-        #       error will be discovered in execution anyway)
   - repo: https://github.com/ansible/ansible-lint.git
     rev: v5.0.2
     hooks:
