@@ -1,0 +1,25 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+
+  tasks:
+    - name: Install basic packages to bare containers
+      tags: skip_ansible_lint
+      raw: |
+        if [ -x "$(command -v apt-get)" ]; then
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update --quiet && apt-get install --assume-yes --no-install-recommends ca-certificates curl python3 python3-apt
+        elif [ -x "$(command -v dnf)" ]; then
+          dnf --assumeyes install ca-certificates curl python3 python3-dnf
+        elif [ -x "$(command -v yum)" ]; then
+          yum install --assumeyes ca-certificates curl python
+        elif [ -x "$(command -v zypper)" ]; then
+          zypper --non-interactive --gpg-auto-import-keys refresh
+          zypper --non-interactive install ca-certificates ca-certificates-cacert ca-certificates-mozilla curl python3
+        elif [ -x "$(command -v apk)" ]; then
+          apk update && apk add ca-certificates curl python3
+        elif [ -x "$(command -v pacman)" ]; then
+          pacman -Syu --noconfirm ca-certificates curl python3
+        fi

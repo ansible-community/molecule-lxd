@@ -21,13 +21,11 @@
 
 import pytest
 import os
-import sh
 
-from molecule import logger
-from molecule.test.conftest import run_command, change_dir_to
+from molecule import logger, util
+from molecule.util import run_command
+from molecule.test.conftest import change_dir_to
 from molecule.test.functional.conftest import metadata_lint_update
-
-# import change_dir_to, temp_dir
 
 LOG = logger.get_logger(__name__)
 
@@ -35,22 +33,26 @@ LOG = logger.get_logger(__name__)
 @pytest.mark.xfail(reason="need to fix template path")
 def test_command_init_scenario(temp_dir):
     role_directory = os.path.join(temp_dir.strpath, "test-init")
-    options = {}
-    cmd = sh.molecule.bake("init", "role", "test-init", **options)
-    run_command(cmd)
+    cmd = ["molecule", "init", "role", "test-init"]
+    result = run_command(cmd)
+    assert result.returncode == 0
     metadata_lint_update(role_directory)
 
     with change_dir_to(role_directory):
         molecule_directory = pytest.helpers.molecule_directory()
         scenario_directory = os.path.join(molecule_directory, "test-scenario")
-        options = {
-            "role_name": "test-init",
-            "driver-name": "lxd",
-        }
-        cmd = sh.molecule.bake("init", "scenario", "test-scenario", **options)
-        run_command(cmd)
-
+        options = {"role_name": "test-init", "driver-name": "lxd"}
+        cmd = [
+            "molecule",
+            "init",
+            "scenario",
+            "test-scenario",
+            *util.dict2args(options),
+        ]
+        result = run_command(cmd)
+        assert result.returncode == 0
         assert os.path.isdir(scenario_directory)
 
-        cmd = sh.molecule.bake("test", "-s", "test-scenario")
-        run_command(cmd)
+        cmd = ["molecule", "--debug", "test", "-s", "test-scenario"]
+        result = run_command(cmd)
+        assert result.returncode == 0
