@@ -1,8 +1,4 @@
 extends: default
-ignore: |
-  */cookiecutter/
-  .github/workflows/
-  .tox
 
 rules:
   braces:

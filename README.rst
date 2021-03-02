@@ -6,8 +6,8 @@ Molecule LXD Plugin
    :target: https://badge.fury.io/py/molecule-lxd
    :alt: PyPI Package
 
-.. image:: https://zuul-ci.org/gated.svg
-   :target: https://dashboard.zuul.ansible.com/t/ansible/builds?project=ansible-community/molecule-lxd
+.. image:: https://github.com/ansible-community/molecule-lxd/actions/workflows/tox.yml/badge.svg
+   :target: https://github.com/ansible-community/molecule-lxd/actions/workflows/tox.yml
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/python/black

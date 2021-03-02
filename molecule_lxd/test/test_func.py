@@ -18,25 +18,22 @@
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
-
+"""Functional tests"""
 import pytest
 import os
 
 from molecule import logger, util
 from molecule.util import run_command
 from molecule.test.conftest import change_dir_to
-from molecule.test.functional.conftest import metadata_lint_update
 
 LOG = logger.get_logger(__name__)
 
 
-@pytest.mark.xfail(reason="need to fix template path")
 def test_command_init_scenario(temp_dir):
     role_directory = os.path.join(temp_dir.strpath, "test-init")
     cmd = ["molecule", "init", "role", "test-init"]
     result = run_command(cmd)
     assert result.returncode == 0
-    metadata_lint_update(role_directory)
 
     with change_dir_to(role_directory):
         molecule_directory = pytest.helpers.molecule_directory()
