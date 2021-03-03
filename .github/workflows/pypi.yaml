@@ -33,7 +33,7 @@ jobs:
 
       # Runs on push to the default branch and after tox tests are completed and success
       - name: Publish to test.pypi.org
-        if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.testpypi_password }}
