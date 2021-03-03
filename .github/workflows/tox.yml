@@ -59,7 +59,7 @@ jobs:
           python-version: ${{ steps.py_ver.outputs.version }}
 
       - name: Install tox
-        run: python -m pip install --user tox
+        run: python -m pip install tox
 
       - name: Run tox -e ${{ matrix.tox_env }}
         run: ${{ matrix.PREFIX }} tox -e ${{ matrix.tox_env }}
