@@ -6,12 +6,14 @@ on:
     workflows: [ 'tox' ]
     branches: [ 'master' ]
     types: [ 'completed' ]
+  release:
+    types: [ 'published' ]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    # Runs on base repository only and after tox tests are completed and success
-    if: github.repository == 'ansible-community/molecule-lxd' && github.event.workflow_run.conclusion == 'success'
+    # Runs on base repository only
+    if: github.repository == 'ansible-community/molecule-lxd'
 
     steps:
       - uses: actions/checkout@v2
@@ -29,9 +31,9 @@ jobs:
       - name: Build dists
         run: tox -e packaging
 
-      # Runs on push to the default branch
+      # Runs on push to the default branch and after tox tests are completed and success
       - name: Publish to test.pypi.org
-        if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.testpypi_password }}
