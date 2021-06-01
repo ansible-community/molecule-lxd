@@ -35,3 +35,7 @@
       loop_control:
         label: "{{ item.name }}"
       no_log: false
+      register: _create
+      until: not _create.failed
+      retries: 3
+      delay: 10
