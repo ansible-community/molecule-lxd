@@ -44,10 +44,3 @@ repos:
         args: []
         require_serial: false
         additional_dependencies: []
-  - repo: https://github.com/ansible/ansible-lint.git
-    rev: v5.0.2
-    hooks:
-      - id: ansible-lint
-        always_run: true
-        args: ["--exclude", "molecule_lxd/cookiecutter", "--exclude", ".github/workflows", "--exclude", "tox"]
-        verbose: true
