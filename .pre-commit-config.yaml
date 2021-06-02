@@ -4,7 +4,7 @@ default_language_version:
 minimum_pre_commit_version: "1.14.0"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.0.1
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -22,12 +22,12 @@ repos:
     hooks:
       - id: doc8
   - repo: https://github.com/python/black.git
-    rev: 20.8b1
+    rev: 21.5b2
     hooks:
       - id: black
         language_version: python3
   - repo: https://gitlab.com/pycqa/flake8.git
-    rev: 3.8.4
+    rev: 3.9.2
     hooks:
       - id: flake8
         additional_dependencies:
@@ -44,10 +44,3 @@ repos:
         args: []
         require_serial: false
         additional_dependencies: []
-  - repo: https://github.com/ansible/ansible-lint.git
-    rev: v5.0.2
-    hooks:
-      - id: ansible-lint
-        always_run: true
-        args: ["--exclude", "molecule_lxd/cookiecutter", "--exclude", ".github/workflows", "--exclude", "tox"]
-        verbose: true
