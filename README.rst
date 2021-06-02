@@ -33,14 +33,14 @@ resources.
 Get Involved
 ============
 
-* Join us in the ``#ansible-molecule`` channel on `Freenode`_.
+* Join us in the ``#ansible-molecule`` irc channel on `libera.chat`_.
 * Join the discussion in `molecule-users Forum`_.
 * Join the community working group by checking the `wiki`_.
 * Want to know about releases, subscribe to `ansible-announce list`_.
 * For the full list of Ansible email Lists, IRC channels see the
   `communication page`_.
 
-.. _`Freenode`: https://freenode.net
+.. _`libera.chat`: https://web.libera.chat/?channel=#ansible-molecule
 .. _`molecule-users Forum`: https://groups.google.com/forum/#!forum/molecule-users
 .. _`wiki`: https://github.com/ansible/community/wiki/Molecule
 .. _`ansible-announce list`: https://groups.google.com/group/ansible-announce
