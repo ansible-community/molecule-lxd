@@ -19,5 +19,10 @@
 #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
 
+import pytest
 
-from molecule.test.conftest import *  # noqa
+
+@pytest.fixture
+def driver_name() -> str:
+    """Return name of the driver to be tested."""
+    return "lxd"
