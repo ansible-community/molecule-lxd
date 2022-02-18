@@ -65,6 +65,7 @@ class LXD(Driver):
             profiles:
               - default
             force_stop: True|False
+            ignore_volatile_options: false
 
     Provide a list of files Molecule will preserve, relative to the scenario
     ephemeral directory, after any ``destroy`` subcommand execution.
