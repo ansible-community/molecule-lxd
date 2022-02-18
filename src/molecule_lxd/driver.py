@@ -18,6 +18,7 @@
 #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
 import os
+from typing import Dict
 from molecule import logger
 from molecule.api import Driver
 
@@ -120,3 +121,8 @@ class LXD(Driver):
 
     def modules_dir(self):
         return os.path.join(os.path.dirname(__file__), "modules")
+
+    @property
+    def required_collections(self) -> Dict[str, str]:
+        """Return collections dict containing names and versions required."""
+        return {"community.general": "4.1.0"}
