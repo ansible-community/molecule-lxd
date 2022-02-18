@@ -28,7 +28,9 @@ jobs:
             PREFIX: PYTEST_REQPASS=2
           - tox_env: py39
             PREFIX: PYTEST_REQPASS=2
-          - tox_env: py39-devel
+          - tox_env: py310
+            PREFIX: PYTEST_REQPASS=2
+          - tox_env: py310-devel
             PREFIX: PYTEST_REQPASS=2
           - tox_env: packaging
 
