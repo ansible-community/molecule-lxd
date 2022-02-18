@@ -1,0 +1,13 @@
+name: release
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    uses: ansible-community/devtools/.github/workflows/release.yml@main
+    with:
+      pypi: true
+    secrets:
+      pypi_password: ${{ secrets.pypi_password }}
+      testpypi_password: ${{ secrets.testpypi_password }}
