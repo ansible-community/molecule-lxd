@@ -17,7 +17,7 @@
 
   tasks:
     - name: Create molecule instance(s)
-      lxd_container:
+      community.general.lxd_container:
         name: "{{ item.name }}"
         state: started
         source: "{{ default_source | combine(item.source | default({})) }}"

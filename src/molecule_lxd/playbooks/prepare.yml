@@ -7,7 +7,7 @@
   tasks:
     - name: Install basic packages to bare containers
       tags: skip_ansible_lint
-      raw: |
+      ansible.builtin.raw: |
         if [ -x "$(command -v apt-get)" ]; then
           export DEBIAN_FRONTEND=noninteractive
           apt-get update --quiet && apt-get install --assume-yes --no-install-recommends ca-certificates curl python3 python3-apt
