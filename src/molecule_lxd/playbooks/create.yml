@@ -24,6 +24,7 @@
         config: "{{ default_config | combine(item.config | default({})) }}"
         architecture: "{{ item.architecture | default(omit) }}"
         devices: "{{ item.devices | default(omit) }}"
+        ignore_volatile_options: "{{ item.ignore_volatile_options | default(false) }}"
         profiles: "{{ item.profiles | default(omit) }}"
         url: "{{ item.url | default(omit) }}"
         cert_file: "{{ item.cert_file | default(omit) }}"
