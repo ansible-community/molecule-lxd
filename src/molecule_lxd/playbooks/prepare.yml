@@ -23,3 +23,7 @@
         elif [ -x "$(command -v pacman)" ]; then
           pacman -Syu --noconfirm ca-certificates curl python3
         fi
+      register: _prepare
+      until: not _prepare.failed
+      retries: 3
+      delay: 10

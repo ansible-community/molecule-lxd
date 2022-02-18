@@ -25,6 +25,8 @@
         architecture: "{{ item.architecture | default(omit) }}"
         devices: "{{ item.devices | default(omit) }}"
         ignore_volatile_options: "{{ item.ignore_volatile_options | default(false) }}"
+        target: "{{ item.target | default(omit) }}"
+        type: "{{ item.type | default(omit) }}"
         profiles: "{{ item.profiles | default(omit) }}"
         url: "{{ item.url | default(omit) }}"
         cert_file: "{{ item.cert_file | default(omit) }}"
