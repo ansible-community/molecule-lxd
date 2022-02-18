@@ -48,6 +48,18 @@ jobs:
           v = '${{ matrix.tox_env }}'.split('-')[0].lstrip('py')
           print('::set-output name=version::{0}.{1}'.format(v[0],v[1:]))
 
+      - name: Enable caching of ~/.cache/pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ steps.py_ver.outputs.version }}-${{ hashFiles('**/setup.cfg', 'tox.ini') }}
+
+      - name: Enable caching of ~/.cache/pre-commit
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ steps.py_ver.outputs.version }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
       # Even our lint and other envs need access to tox
       - name: Install a default Python
         uses: actions/setup-python@v2
