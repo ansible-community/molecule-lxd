@@ -110,7 +110,10 @@ class LXD(Driver):
         return {"instance": instance_name}
 
     def ansible_connection_options(self, instance_name):
-        return {"ansible_connection": "lxd"}
+        return {
+            "ansible_connection": "community.general.lxd",
+            "ansible_lxd_remote": os.getenv("LXC_REMOTE", "local"),
+        }
 
     def sanity_checks(self):
         # FIXME(decentral1se): Implement sanity checks
