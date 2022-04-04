@@ -18,11 +18,11 @@ repos:
         # https://github.com/pre-commit/pre-commit-hooks/issues/273
         args: ["--unsafe"]
   - repo: https://github.com/PyCQA/doc8.git
-    rev: 0.10.1
+    rev: 0.11.1
     hooks:
       - id: doc8
   - repo: https://github.com/psf/black
-    rev: 22.1.0
+    rev: 22.3.0
     hooks:
       - id: black
         language_version: python3
