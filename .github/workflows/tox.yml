@@ -7,7 +7,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    - cron: 1 0 * * *  # Run daily at 0:01 UTC
+    - cron: 1 0 * * * # Run daily at 0:01 UTC
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
