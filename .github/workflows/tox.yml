@@ -16,6 +16,7 @@ jobs:
   tests:
     name: ${{ matrix.tox_env }}
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
