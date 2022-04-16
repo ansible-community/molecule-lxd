@@ -3,8 +3,9 @@ name: tox
 on:
   push:
     branches:
-      - "**"
+      - "main"
   pull_request:
+  workflow_dispatch:
   schedule:
     - cron: 1 0 * * *  # Run daily at 0:01 UTC
 
