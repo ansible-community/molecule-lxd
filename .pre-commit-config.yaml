@@ -18,12 +18,18 @@ repos:
         # https://github.com/pre-commit/pre-commit-hooks/issues/273
         args: ["--unsafe"]
   - repo: https://github.com/pre-commit/mirrors-prettier
+    # keep it before yamllint
     rev: v2.6.2
     hooks:
       - id: prettier
         additional_dependencies:
           - prettier
           - prettier-plugin-toml
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.26.3
+    hooks:
+      - id: yamllint
+        args: ["--strict"]
   - repo: https://github.com/PyCQA/doc8.git
     rev: 0.11.1
     hooks:
