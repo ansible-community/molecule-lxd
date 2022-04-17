@@ -17,21 +17,30 @@ jobs:
   tests:
     name: ${{ matrix.tox_env }}
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
         include:
           - tox_env: lint
-          # - tox_env: docs
+            python-version: "3.8"
+          - tox_env: packaging
+            python-version: "3.9"
           - tox_env: py38
             PREFIX: PYTEST_REQPASS=2
+            python-version: "3.8"
           - tox_env: py39
             PREFIX: PYTEST_REQPASS=2
+            python-version: "3.9"
           - tox_env: py310
             PREFIX: PYTEST_REQPASS=2
+            python-version: "3.10"
+          - tox_env: py38-devel
+            PREFIX: PYTEST_REQPASS=2
+            python-version: "3.8"
           - tox_env: py310-devel
             PREFIX: PYTEST_REQPASS=2
-          - tox_env: packaging
+            python-version: "3.10"
 
     steps:
       - uses: actions/checkout@v2
@@ -39,37 +48,23 @@ jobs:
       - name: LXD init
         uses: bonddim/action-lxd@v1
 
-      - name: Find python version
-        id: py_ver
-        shell: python
-        if: ${{ contains(matrix.tox_env, 'py') }}
-        run: |
-          v = '${{ matrix.tox_env }}'.split('-')[0].lstrip('py')
-          print('::set-output name=version::{0}.{1}'.format(v[0],v[1:]))
-
       - name: Enable caching of ~/.cache/pip
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: ${{ steps.py_ver.outputs.version }}-${{ hashFiles('**/setup.cfg', 'tox.ini') }}
+          key: ${{ matrix.python-version }}-${{ hashFiles('**/setup.cfg', 'tox.ini') }}
 
       - name: Enable caching of ~/.cache/pre-commit
         uses: actions/cache@v2
         with:
           path: ~/.cache/pre-commit
-          key: ${{ steps.py_ver.outputs.version }}-${{ hashFiles('.pre-commit-config.yaml') }}
-
-      # Even our lint and other envs need access to tox
-      - name: Install a default Python
-        uses: actions/setup-python@v2
-        if: ${{ ! contains(matrix.tox_env, 'py') }}
+          key: ${{ matrix.python-version }}-${{ hashFiles('.pre-commit-config.yaml') }}
 
       # Be sure to install the version of python needed by a specific test, if necessary
       - name: Set up Python version
         uses: actions/setup-python@v2
-        if: ${{ contains(matrix.tox_env, 'py') }}
         with:
-          python-version: ${{ steps.py_ver.outputs.version }}
+          python-version: ${{ matrix.python-version }}
 
       - name: Install tox
         run: python -m pip install tox
