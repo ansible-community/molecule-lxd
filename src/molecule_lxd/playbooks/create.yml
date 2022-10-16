@@ -32,7 +32,7 @@
         cert_file: "{{ item.cert_file | default(omit) }}"
         key_file: "{{ item.key_file | default(omit) }}"
         trust_password: "{{ item.trust_password | default(omit) }}"
-        wait_for_ipv4_addresses: true
+        wait_for_ipv4_addresses: "{{ item.wait_for_ipv4_addresses | default(true) }}"
         timeout: 600
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
